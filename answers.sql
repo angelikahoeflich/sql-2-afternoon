@@ -137,7 +137,65 @@ DELETE FROM practice_delete
 WHERE value = 150
 
 
+ECOMMERCE
 
+CREATE TABLE users(
+  user_id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100)
+ )
+CREATE TABLE products(
+  product_id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  price NUMERIC
+ )
+
+ CREATE TABLE orders (
+  order_id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(user_id),
+  product_id INT REFERENCES products(product_id)
+ )
+
+ INSERT INTO users (name, email)
+VALUES 
+('hi', 'hey@hey.com'),
+('hey', 'hi@hey.com'),
+('whats', 'up@hey.com');
+
+ INSERT INTO products (name, price)
+VALUES 
+('angelika', 5),
+('monkey', 30),
+('whatever', 45);
+
+ INSERT INTO orders (user_id, product_id)
+VALUES 
+(1,3),
+(2,4),
+(6,7)
+;
+
+SELECT * FROM products 
+WHERE product_id = 1;
+
+
+SELECT * FROM orders;
+
+SELECT SUM(price)
+FROM products p
+JOIN orders o ON o.product_id = p.product_id
+WHERE o.order_id = 1
+
+ALTER TABLE users
+ADD FOREIGN KEY order_id REFERENCES users(user_id);
+
+
+
+
+
+
+
+	
 
 
 
