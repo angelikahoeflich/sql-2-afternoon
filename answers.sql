@@ -35,6 +35,62 @@ FROM track t
 JOIN playlist_track pt ON t.track_id = pt.track_id
 JOIN playlist p on pt.playlist_id = p.playlist_id
 
+SELECT t.name, al.title
+FROM track t
+JOIN album al ON t.album_id = al.album_id
+JOIN genre g on g.genre_id = t.genre_id
+WHERE g.name = 'Alternative & Punk'
+
+NESTED QUERIES
+
+SELECT *
+FROM invoice
+WHERE invoice_id IN (SELECT invoice_id FROM invoice_line WHERE unit_price > 0.99
+
+SELECT *
+FROM playlist_track
+WHERE playlist_id IN (SELECT playlist_id FROM playlist WHERE name ='Music')
+
+SELECT name
+FROM track
+WHERE track_id IN (SELECT track_id FROM playlist_track WHERE playlist_id = 5)
+
+SELECT *
+FROM track
+WHERE genre_id IN (SELECT genre_id FROM genre WHERE name = 'Comedy')
+
+SELECT *
+FROM track
+WHERE album_id IN (SELECT album_id FROM album WHERE title = 'Fireball')
+
+SELECT *
+FROM track
+WHERE album_id 
+	IN (SELECT album_id FROM album WHERE artist_id IN (
+    	SELECT artist_id FROM artist WHERE name = 'Queen'))
+
+PRACTICE UPDATING ROWS
+
+UPDATE customer 
+SET fax = null
+WHERE fax IS NOT null
+
+UPDATE customer 
+SET company = 'Self'
+WHERE company IS null
+
+UPDATE customer 
+SET last_name = 'Thompson'
+WHERE first_name ='Julia' AND last_name = 'Barnett' 
+
+UPDATE customer 
+SET support_rep_id = 4
+WHERE email = 'luisrojas@yahoo.cl'
+
+UPDATE track 
+SET composer = 'The darkness around us'
+WHERE genre_id = (SELECT genre_id FROM genre WHERE name = 'Metal')
+AND composer IS null
 
 
 
