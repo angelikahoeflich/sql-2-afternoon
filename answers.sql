@@ -93,4 +93,51 @@ WHERE genre_id = (SELECT genre_id FROM genre WHERE name = 'Metal')
 AND composer IS null
 
 
+GROUP BY
+
+SELECT COUNT(*), gen.name
+FROM track tr
+JOIN genre gen ON tr.genre_id = gen.genre_id
+GROUP by gen.name
+
+
+SELECT COUNT(*), gen.name
+FROM track tr
+JOIN genre gen ON tr.genre_id = gen.genre_id
+WHERE gen.name = 'Pop' OR gen.name = 'Rock'
+GROUP BY gen.name
+
+SELECT art.name, COUNT(*)
+FROM album al
+JOIN artist art ON art.artist_id = al.artist_id
+GROUP BY art.name
+
+
+USE_DISTINCT
+
+SELECT DISTINCT composer
+FROM track
+
+SELECT DISTINCT billing_postal_code
+FROM invoice
+
+SELECT DISTINCT company
+FROM customer
+
+DELETE_PRACTICE
+
+
+DELETE FROM practice_delete WHERE TYPE = 'bronze'
+RETURNING *
+
+DELETE FROM practice_delete WHERE TYPE = 'silver'
+RETURNING *
+
+DELETE FROM practice_delete
+WHERE value = 150
+
+
+
+
+
 
